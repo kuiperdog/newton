@@ -1,0 +1,17 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('./background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: sans-serif;
+}
