@@ -1,45 +1,14 @@
 <script setup>
-import Progress from './Progress.vue';
-import { getCandidates, getTotalComo, votesPerCandidates } from './contract'
+import Counter from './components/Counter.vue';
+import Header from './components/Header.vue';
 </script>
 
 <template>
   <div id="app">
-    <header>
-      <h1>Newton <a href="https://github.com/kuiperdog/newton">v{{ version }}</a></h1>
-      <h1>by <a href="https://twitter.com/kuipertwt">@kuipertwt</a></h1>
-    </header>
-    <Progress color="green" :percentage="Math.round(currentComo / totalComo * 100) + '%'" :label="currentComo + '/' + totalComo"/>
-    <Progress class="optionBar" color="blue" :percentage="Math.round(votes[i] / totalComo * 100) + '%'" v-for="(candidate, i) in candidates"
-              :label="candidate + ' - ' + votes[i]" :index="votes[i]"/>
+    <Header/>
+    <Counter/>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      id: new URLSearchParams(window.location.search).get('id'),
-      version: __PACKAGE_VERSION__,
-      candidates: [],
-      votes: [0],
-      totalComo: 1,
-      currentComo: 0
-    }
-  },
-  created() {
-    this.setProgress()
-  },
-  methods: {
-    async setProgress() {
-      this.candidates = await getCandidates(this.id)
-      this.totalComo = await getTotalComo(this.id)
-      this.votes = await votesPerCandidates(this.id)
-      this.currentComo = this.votes.reduce((a, b) => a + b, 0)
-    }
-  }
-}
-</script>
 
 <style scoped>
 #app {
@@ -59,26 +28,5 @@ export default {
     margin: 0;
     border-radius: 0;
   }
-}
-
-header {
-  width: 100%;
-  padding: 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-h1 {
-  font-size: 24px;
-}
-
-a {
-  color: inherit;
-}
-
-.optionBar {
-  margin: 25px;
-  border-radius: 15px;
 }
 </style>
