@@ -1,0 +1,44 @@
+[
+  {
+    "name": "EVOLution",
+    "choices": [
+      {
+        "name": "HyeRin",
+        "ids": ["c1", "c2", "c3"]
+      },
+      {
+        "name": "SooMin",
+        "ids": ["c4", "c5", "c6"]
+      },
+      {
+        "name": "YeonJi",
+        "ids": ["c7", "c8", "c9"]
+      },
+      {
+        "name": "Nien",
+        "ids": ["c10", "c11", "c12"]
+      }
+    ]
+  },
+  {
+    "name": "LOVElution",
+    "choices": [
+      {
+        "name": "HyeRin",
+        "ids": ["c4", "c7", "c10"]
+      },
+      {
+        "name": "SooMin",
+        "ids": ["c1", "c8", "c11"]
+      },
+      {
+        "name": "YeonJi",
+        "ids": ["c2", "c5", "c12"]
+      },
+      {
+        "name": "Nien",
+        "ids": ["c3", "c6", "c9"]
+      }
+    ]
+  }
+]
