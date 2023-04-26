@@ -8,7 +8,7 @@ import titles from '../assets/titles.json';
   <div id="counter">
     <Progress color="green" :percentage="Math.round(currentComo / totalComo * 100) + '%'" :label="currentComo + '/' + totalComo"/>
     <div id="notifier" v-if="!complete">
-      <span :class="{ pulse: updated }" :key="restartPulse" @animationend="this.updated = false" id="callIndicator">●</span>
+      <span :class="{ pulse: updated }" :key="restartPulse" @animationend="updated = false" id="callIndicator">●</span>
       <span>LIVE: Updating once per second</span>
     </div>
     <Progress class="optionBar" color="blue" v-for="option in options" :percentage="Math.round(option.votes / totalComo * 100) + '%'"
