@@ -9,7 +9,6 @@
 export default {
   data() {
     return {
-      id: new URLSearchParams(window.location.search).get('id'),
       version: __PACKAGE_VERSION__
     }
   }

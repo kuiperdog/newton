@@ -6,9 +6,19 @@ import Header from './components/Header.vue';
 <template>
   <div id="app">
     <Header/>
-    <Counter/>
+    <Counter :pollId="activePoll"/>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      activePoll: new URLSearchParams(window.location.search).get('id')
+    }
+  }
+}
+</script>
 
 <style scoped>
 #app {

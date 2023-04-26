@@ -15,7 +15,6 @@ import { getCandidates, getTotalComo, votesPerCandidates } from '../contract';
 export default {
   data() {
     return {
-        id: new URLSearchParams(window.location.search).get('id'),
         candidates: [],
         votes: [0],
         totalComo: 1,
@@ -27,12 +26,13 @@ export default {
   },
   methods: {
     async setProgress() {
-      this.candidates = await getCandidates(this.id)
-      this.totalComo = await getTotalComo(this.id)
-      this.votes = await votesPerCandidates(this.id)
+      this.candidates = await getCandidates(this.pollId)
+      this.totalComo = await getTotalComo(this.pollId)
+      this.votes = await votesPerCandidates(this.pollId)
       this.currentComo = this.votes.reduce((a, b) => a + b, 0)
     }
-  }
+  },
+  props: ['pollId']
 }
 </script>
 
