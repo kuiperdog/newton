@@ -10,8 +10,8 @@ import { getCandidates, getTotalComo, votesPerCandidates } from '../contract';
       <span :class="{ pulse: updated }" :key="restartPulse" @animationend="this.updated = false" id="callIndicator">●</span>
       <span>LIVE: Updating once per second</span>
     </div>
-    <Progress class="optionBar" color="blue" :percentage="Math.round(votes[i] / totalComo * 100) + '%'" v-for="(candidate, i) in candidates"
-      :label="candidate + ' - ' + votes[i]" :index="votes[i]"/>
+    <Progress class="optionBar" color="blue" v-for="option in options" :percentage="Math.round(option.votes / totalComo * 100) + '%'"
+      :label="option.title + ' - ' + option.votes"/>
   </div>
 </template>
 
@@ -19,8 +19,7 @@ import { getCandidates, getTotalComo, votesPerCandidates } from '../contract';
 export default {
   data() {
     return {
-        candidates: [],
-        votes: [0],
+        options: [],
         totalComo: 1,
         currentComo: 0,
         updated: false,
@@ -29,16 +28,22 @@ export default {
         timer: null
     }
   },
-  created() {
-    this.timer = setInterval(this.refresh, 1000)
+  async created() {
+    this.totalComo = await getTotalComo(this.pollId)
+    let candidates = await getCandidates(this.pollId)
+    let opt = []
+    candidates.forEach((candidate, i) => { opt.push({index: i, title: candidate, votes: 0}) })
+    this.options = opt
+
     this.refresh()
+    this.timer = setInterval(this.refresh, 1000)
   },
   methods: {
     async refresh() {
-      this.candidates = await getCandidates(this.pollId)
-      this.totalComo = await getTotalComo(this.pollId)
-      this.votes = await votesPerCandidates(this.pollId)
-      this.currentComo = this.votes.reduce((a, b) => a + b, 0)
+      let votes = await votesPerCandidates(this.pollId)
+      this.currentComo = votes.reduce((a, b) => a + b, 0)
+      this.options.forEach((option, i) => this.options[i].votes = votes[option.index])
+      this.options.sort((a, b) => b.votes - a.votes)
 
       if (this.currentComo == this.totalComo) {
         this.complete = true
