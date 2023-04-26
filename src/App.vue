@@ -33,7 +33,7 @@ export default {
 
 @media only screen and (max-width: 600px) {
   #app {
-    width: 100vh;
+    width: 100vw;
     height: 100vh;
     margin: 0;
     border-radius: 0;
