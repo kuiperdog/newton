@@ -14,7 +14,7 @@ import Header from './components/Header.vue';
 export default {
   data() {
     return {
-      activePoll: new URLSearchParams(window.location.search).get('id')
+      activePoll: 73
     }
   }
 }

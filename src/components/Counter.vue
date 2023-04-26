@@ -1,6 +1,7 @@
 <script setup>
 import Progress from './Progress.vue';
 import { getCandidates, getTotalComo, votesPerCandidates } from '../contract';
+import titles from '../assets/titles.json';
 </script>
 
 <template>
@@ -32,7 +33,7 @@ export default {
     this.totalComo = await getTotalComo(this.pollId)
     let candidates = await getCandidates(this.pollId)
     let opt = []
-    candidates.forEach((candidate, i) => { opt.push({index: i, title: candidate, votes: 0}) })
+    candidates.forEach((candidate, i) => { opt.push({index: i, title: titles[i].title, votes: 0}) })
     this.options = opt
 
     this.refresh()
