@@ -24,6 +24,7 @@ export default {
   width: auto;
   height: 30px;
   background-color: #4b4b4b;
+  overflow: hidden;
 }
 
 #bar {
