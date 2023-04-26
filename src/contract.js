@@ -30,14 +30,14 @@ export async function getCandidates(id) {
 }
 
 export async function getTotalComo(id) {
-    return web3.eth.abi.decodeParameters([
+    return Math.round(web3.eth.abi.decodeParameters([
         'string',
         'uint256',
         'uint256',
         'uint256',
         'uint256',
         'uint256',
-        'bool'], await call(id, 'polls'))[4] / Math.pow(10, 18)
+        'bool'], await call(id, 'polls'))[4] / Math.pow(10, 18))
 }
 
 export async function votesPerCandidates(id) {
