@@ -36,7 +36,7 @@ export default {
     this.options = opt
 
     this.refresh()
-    this.timer = setInterval(this.refresh, 1000)
+    this.timer = setInterval(() => this.refresh(), 1000)
   },
   methods: {
     async refresh() {
