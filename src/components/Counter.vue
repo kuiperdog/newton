@@ -6,7 +6,7 @@ import { getCandidates, getTotalComo, votesPerCandidates } from '../contract';
 <template>
   <div id="counter">
     <Progress color="green" :percentage="Math.round(currentComo / totalComo * 100) + '%'" :label="currentComo + '/' + totalComo"/>
-    <div id="notifier">
+    <div id="notifier" v-if="!complete">
       <span :class="{ pulse: updated }" :key="restartPulse" @animationend="this.updated = false" id="callIndicator">●</span>
       <span>LIVE: Updating once per second</span>
     </div>
@@ -24,12 +24,14 @@ export default {
         totalComo: 1,
         currentComo: 0,
         updated: false,
-        restartPulse: false
+        restartPulse: false,
+        complete: false,
+        timer: null
     }
   },
   created() {
+    this.timer = setInterval(this.refresh, 1000)
     this.refresh()
-    setInterval(this.refresh, 1000)
   },
   methods: {
     async refresh() {
@@ -37,9 +39,15 @@ export default {
       this.totalComo = await getTotalComo(this.pollId)
       this.votes = await votesPerCandidates(this.pollId)
       this.currentComo = this.votes.reduce((a, b) => a + b, 0)
-      this.updated = false
-      this.restartPulse = !this.restartPulse // Forcing a re-render to restart the animation
-      this.updated = true
+
+      if (this.currentComo == this.totalComo) {
+        this.complete = true
+        clearInterval(this.timer)
+      } else {
+        this.updated = false
+        this.restartPulse = !this.restartPulse // Forcing a re-render to restart the animation
+        this.updated = true
+      }
     }
   },
   props: ['pollId']
