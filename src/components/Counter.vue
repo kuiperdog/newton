@@ -1,6 +1,6 @@
 <script setup>
 import Progress from './Progress.vue';
-import { getCandidates, getTotalComo, votesPerCandidates } from '../contract';
+import { getCandidates, getTotalComo, votesPerCandidates } from '../contract.js';
 import titles from '../assets/titles.json';
 </script>
 
