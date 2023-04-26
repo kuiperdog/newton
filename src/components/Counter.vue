@@ -30,7 +30,6 @@ export default {
     }
   },
   async created() {
-    this.totalComo = await getTotalComo(this.pollId)
     let candidates = await getCandidates(this.pollId)
     let opt = []
     candidates.forEach((candidate, i) => { opt.push({index: i, title: titles[i].title, votes: 0}) })
@@ -41,6 +40,7 @@ export default {
   },
   methods: {
     async refresh() {
+      this.totalComo = await getTotalComo(this.pollId)
       let votes = await votesPerCandidates(this.pollId)
       this.currentComo = votes.reduce((a, b) => a + b, 0)
       this.options.forEach((option, i) => this.options[i].votes = votes[option.index])
