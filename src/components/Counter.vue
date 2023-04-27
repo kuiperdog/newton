@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     async refresh() {
-      this.totalComo = await getTotalComo(this.pollId)
+      if (this.currentComo < 1)
+        this.totalComo = await getTotalComo(this.pollId)
       let votes = await votesPerCandidates(this.pollId)
       this.currentComo = votes.reduce((a, b) => a + b, 0)
 
