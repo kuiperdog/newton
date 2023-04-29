@@ -1,27 +1,14 @@
 [
   {
-    "name": "EVOLution",
+    "name": "Two Big WAVes - After",
     "choices": [
       {
-        "name": "YeonJi",
-        "ids": ["c1"]
+        "name": "EVOLution",
+        "ids": ["EVOLution"]
       },
       {
-        "name": "Nien",
-        "ids": ["c2"]
-      }
-    ]
-  },
-  {
-    "name": "LOVElution",
-    "choices": [
-      {
-        "name": "YeonJi",
-        "ids": ["c2"]
-      },
-      {
-        "name": "Nien",
-        "ids": ["c1"]
+        "name": "LOVElution",
+        "ids": ["LOVElution"]
       }
     ]
   }

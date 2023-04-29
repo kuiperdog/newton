@@ -14,7 +14,7 @@ import Header from './components/Header.vue';
 export default {
   data() {
     return {
-      activePoll: 75
+      activePoll: 76
     }
   }
 }
