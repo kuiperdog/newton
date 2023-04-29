@@ -43,19 +43,16 @@ export default {
       if (this.currentComo < 1)
         this.totalComo = await getTotalComo(this.pollId)
       let votes = await votesPerCandidates(this.pollId)
-      let combinedVotes = votes.reduce((a, b) => a + b, 0)
+      this.currentComo = votes.reduce((a, b) => a + b, 0)
 
-      if (combinedVotes > this.currentComo) {
-        this.currentComo = combinedVotes
-        this.polls.forEach((poll) => {
-          poll.choices.forEach((choice) => {
-            let como = 0
-            choice.ids.forEach((id) => como += votes[this.candidateIndex.indexOf(id)])
-            choice.votes = como
-          })
-          poll.choices.sort((a, b) => b.votes - a.votes)
+      this.polls.forEach((poll) => {
+        poll.choices.forEach((choice) => {
+          let como = 0
+          choice.ids.forEach((id) => como += votes[this.candidateIndex.indexOf(id)])
+          choice.votes = como
         })
-      }
+        poll.choices.sort((a, b) => b.votes - a.votes)
+      })
 
       if (this.currentComo == this.totalComo) {
         this.complete = true
